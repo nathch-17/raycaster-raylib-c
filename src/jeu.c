@@ -45,16 +45,19 @@ void generer_map(){
 void move_player(char key,player* pl){
   switch (key) {
     case 's':
-      pl->pos_y ++;
+      if(map[pl->pos_y + 1][pl->pos_x] == 0){
+      pl->pos_y ++;}
       break;
     case 'q':
-      pl->pos_x --;
+      if(map[pl->pos_y][pl->pos_x - 1] == 0) {pl->pos_x --;}
       break;
     case 'z':
-      pl->pos_y --;
+      if(map[pl->pos_y - 1][pl-> pos_x] == 0)
+      {pl->pos_y --;}
       break;
-    case 'd': 
-      pl->pos_x ++;
+    case 'd':
+      if(map[pl->pos_y][pl->pos_x + 1] == 0){ 
+        pl->pos_x ++;}
       break;
   }
 
