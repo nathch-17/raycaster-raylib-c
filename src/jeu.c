@@ -27,6 +27,16 @@ void print_grid(int grid[MAX][MAX],player* pl){
   } 
  }
 
+void draw_grid(int grid[MAX][MAX]){
+  for (int i = 0;i<MAX;i++) {
+    for (int j = 0 ;j < MAX;j++) {
+      if(grid[i][j] == 1){
+      DrawRectangle(j*100,i*100,100,100,BLACK);}
+     
+
+    }
+  }
+}
 
 
 void generer_map(){
@@ -43,26 +53,29 @@ void generer_map(){
   }
 }
 
-void move_player(char key,player* pl){
-  switch (key) {
-    case 's':
+void move_player(player* pl){
+  
+    if (IsKeyPressed(KEY_S)){
       if(map[pl->pos_y + 1][pl->pos_x] == 0){
-      pl->pos_y ++;}
-      break;
-    case 'q':
-      if(map[pl->pos_y][pl->pos_x - 1] == 0) {pl->pos_x --;}
-      break;
-    case 'z':
-      if(map[pl->pos_y - 1][pl-> pos_x] == 0)
-      {pl->pos_y --;}
-      break;
-    case 'd':
+      pl->pos_y +=1;}
+    }
+    
+    if (IsKeyPressed(KEY_A)){
+      if(map[pl->pos_y][pl->pos_x-1] == 0) {
+        pl->pos_x -=1;}
+    }
+    
+    if (IsKeyPressed(KEY_W)){
+      if(map[pl->pos_y-1][pl-> pos_x] == 0){
+        pl->pos_y -= 1;}
+      }
+  
+    if(IsKeyPressed(KEY_D)){
       if(map[pl->pos_y][pl->pos_x + 1] == 0){ 
-        pl->pos_x ++;}
-      break;
-  }
-
+        pl->pos_x +=1;}
+      }
 }
+
 int main()
 {
   const int screenWidth = 800;
@@ -72,27 +85,36 @@ int main()
   SetTargetFPS(60);
   
 
-  char key;
-
   player pl;
   pl.joueur = 'P';
   pl.pos_x = 3;
   pl.pos_y = 3;
+  generer_map();
 
 
-  while (true) {
-    generer_map();
-    print_grid(map,&pl);
-    scanf(" %c",&key);
-    move_player(key,&pl); 
+
+
+  while (!WindowShouldClose()) 
+    {
+     
+     
+      
+      BeginDrawing();
+        ClearBackground(WHITE);
+        draw_grid(map);
+        DrawRectangle(pl.pos_x*100,pl.pos_y*100,100,100,RED);
+        move_player(&pl); 
+      
+      EndDrawing();
+    
+   
     
     
   }
 
-  print_grid(map,&pl);
-  printf("\n");
-  generer_map();
-  print_grid(map,&pl);
+
+
+ 
 
   CloseWindow();
   return EXIT_SUCCESS;
