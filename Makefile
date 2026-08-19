@@ -1,5 +1,5 @@
 CC = gcc 
-CFLAGS = -Wall -Wextra -Werror -I include -lraylib
+CFLAGS = -Wall -Wextra -Werror -I include -lraylib -lm
 NAME = jeu_test
 SRC = src/jeu.c \
 

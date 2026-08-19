@@ -2,21 +2,21 @@
 #include <stdlib.h>
 
 struct joueur {
-  int pos_x;
-  int pos_y;
-  char joueur;
+  //Position sur le tableau en 2D
+  float pos_x;
+  float pos_y;
+// Vecteur de direction 
+  float dir_x;
+  float dir_y;
 
+  //Vitesse joueur déplacement
+  float spd;
+
+  char joueur;
+  
+  float rot_spd;
 };
 
-enum MoveState {
-  MOVE_UP,
-  MOVE_DOWN,
-  MOVE_LEFT,
-  MOVE_RIGTH,
-  MOVE_NONE
-}MoveState;
-
-typedef enum MoveState move;
 typedef struct joueur player;
 
 

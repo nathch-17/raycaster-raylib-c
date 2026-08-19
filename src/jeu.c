@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "raylib.h"
 #include "joueur.h"
+#include <math.h>
+
 
 #define MAX 8
 
@@ -53,31 +55,45 @@ void generer_map(){
   }
 }
 
-void move_player(player* pl){
-  
-    if (IsKeyPressed(KEY_S)){
-      if(map[pl->pos_y + 1][pl->pos_x] == 0){
-      pl->pos_y +=1;}
-    }
-    
-    if (IsKeyPressed(KEY_A)){
-      if(map[pl->pos_y][pl->pos_x-1] == 0) {
-        pl->pos_x -=1;}
-    }
-    
-    if (IsKeyPressed(KEY_W)){
-      if(map[pl->pos_y-1][pl-> pos_x] == 0){
-        pl->pos_y -= 1;}
-      }
-  
-    if(IsKeyPressed(KEY_D)){
-      if(map[pl->pos_y][pl->pos_x + 1] == 0){ 
-        pl->pos_x +=1;}
-      }
-}
 
-int main()
-{
+
+void move_player2(player* pl){
+  
+  if (IsKeyPressed(KEY_W)){
+    if(/*vérifier collisions*/
+        map[(int)(pl->pos_y + pl->spd*pl->dir_y)][(int) (pl->pos_x + pl->spd*pl->dir_x)] == 0){
+      pl->pos_x += pl->spd*pl->dir_x;
+      pl->pos_y += pl->spd*pl->dir_y;
+    }
+  }
+  if(IsKeyPressed(KEY_S)){
+    if(/*vérifier collisions*/
+        map[(int)(pl->pos_y - pl->spd*pl->dir_y)][(int)(pl->pos_x - pl->spd*pl->dir_x)] == 0 ){
+    pl->pos_x -= pl->spd*pl->dir_x;
+    pl->pos_y -= pl->spd*pl->dir_y;
+    }
+  }
+
+  if(IsKeyPressed(KEY_A)){
+    /*stockage ancienne variable de direction pour les deux axes*/
+    float old_dir_x = pl->dir_x;
+    float old_dir_y = pl->dir_y;
+    /*application de la formule*/
+    pl->dir_x = old_dir_x*cos(pl->rot_spd)-old_dir_y*sin(pl->rot_spd);
+    pl->dir_y = old_dir_x*sin(pl->rot_spd)+old_dir_y*cos(pl->rot_spd);
+  }
+  if(IsKeyPressed(KEY_D)){
+    float old_dir_x = pl->dir_x;
+    float old_dir_y = pl->dir_y;
+    
+    pl->dir_x = old_dir_x*cos(-pl->rot_spd)-old_dir_y*sin(-pl->rot_spd);
+    pl->dir_y = old_dir_x*sin(-pl->rot_spd)+old_dir_y*cos(-pl->rot_spd);
+
+    
+  }
+}
+int main(){
+   
   const int screenWidth = 800;
   const int screenHeight = 450;
 
@@ -87,10 +103,14 @@ int main()
 
   player pl;
   pl.joueur = 'P';
-  pl.pos_x = 3;
-  pl.pos_y = 3;
-  generer_map();
+  pl.pos_x = 3.5f;
+  pl.pos_y = 3.5f;
+  pl.dir_x = 1;
+  pl.dir_y = 0;
+  pl.spd = 0.1f;
+  pl.rot_spd = 0.05f;
 
+  generer_map();
 
 
 
@@ -103,7 +123,7 @@ int main()
         ClearBackground(WHITE);
         draw_grid(map);
         DrawRectangle(pl.pos_x*100,pl.pos_y*100,100,100,RED);
-        move_player(&pl); 
+        move_player2(&pl); 
       
       EndDrawing();
     
