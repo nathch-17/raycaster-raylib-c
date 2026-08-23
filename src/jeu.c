@@ -59,14 +59,14 @@ void generer_map(){
 
 void move_player2(player* pl){
   
-  if (IsKeyPressed(KEY_W)){
+  if (IsKeyDown(KEY_W)){
     if(/*vérifier collisions*/
         map[(int)(pl->pos_y + pl->spd*pl->dir_y)][(int) (pl->pos_x + pl->spd*pl->dir_x)] == 0){
       pl->pos_x += pl->spd*pl->dir_x;
       pl->pos_y += pl->spd*pl->dir_y;
     }
   }
-  if(IsKeyPressed(KEY_S)){
+  if(IsKeyDown(KEY_S)){
     if(/*vérifier collisions*/
         map[(int)(pl->pos_y - pl->spd*pl->dir_y)][(int)(pl->pos_x - pl->spd*pl->dir_x)] == 0 ){
     pl->pos_x -= pl->spd*pl->dir_x;
@@ -74,7 +74,7 @@ void move_player2(player* pl){
     }
   }
 
-  if(IsKeyPressed(KEY_A)){
+  if(IsKeyDown(KEY_A)){
     /*stockage ancienne variable de direction pour les deux axes*/
     float old_dir_x = pl->dir_x;
     float old_dir_y = pl->dir_y;
@@ -82,7 +82,7 @@ void move_player2(player* pl){
     pl->dir_x = old_dir_x*cos(pl->rot_spd)-old_dir_y*sin(pl->rot_spd);
     pl->dir_y = old_dir_x*sin(pl->rot_spd)+old_dir_y*cos(pl->rot_spd);
   }
-  if(IsKeyPressed(KEY_D)){
+  if(IsKeyDown(KEY_D)){
     float old_dir_x = pl->dir_x;
     float old_dir_y = pl->dir_y;
     
@@ -109,6 +109,14 @@ int main(){
   pl.dir_y = 0;
   pl.spd = 0.1f;
   pl.rot_spd = 0.05f;
+  float taille = 0.4f;
+  float largeur = 0.3f;
+  Vector2 v1;
+  Vector2 v2;
+  Vector2 v3;
+
+
+
 
   generer_map();
 
@@ -116,13 +124,28 @@ int main(){
 
   while (!WindowShouldClose()) 
     {
-     
+
+      float perp_x = - pl.dir_y;
+      float perp_y = pl.dir_x;
+
+      v1.x =( pl.pos_x + taille * pl.dir_x)*100;
+      v1.y = (pl.pos_y + taille * pl.dir_y)*100;
+  
+      v2.x = (pl.pos_x - (taille * pl.dir_x) + (largeur * perp_x))*100;
+      v2.y = (pl.pos_y - (taille * pl.dir_y) + (largeur * perp_y))*100;
+
+      v3.x = (pl.pos_x - (taille * pl.dir_x) - (largeur * perp_x))*100;
+      v3.y = (pl.pos_y - (taille * pl.dir_y) - (largeur * perp_y))*100;
+
+
      
       
       BeginDrawing();
         ClearBackground(WHITE);
         draw_grid(map);
-        DrawRectangle(pl.pos_x*100,pl.pos_y*100,100,100,RED);
+       
+        DrawTriangle(v1,v3,v2,RED);
+        
         move_player2(&pl); 
       
       EndDrawing();
