@@ -1,7 +1,7 @@
 CC = gcc 
 CFLAGS = -Wall -Wextra -Werror -I include -lraylib -lm
 NAME = jeu_test
-SRC = src/jeu.c \
+SRC = src/jeu.c src/map.c
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
