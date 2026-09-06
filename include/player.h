@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,5 +21,7 @@ struct joueur {
 };
 
 typedef struct joueur player;
+void move_player2(player* pl);
 
-
+void draw_player(player* pl);
+#endif

@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "joueur.h" // Nécessaire car print_grid utilise le type player*
+#include "player.h" // Nécessaire car print_grid utilise le type player*
 
 #define MAX 8
 

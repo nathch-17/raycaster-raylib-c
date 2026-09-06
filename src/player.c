@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "raylib.h"
-#include "joueur.h"
 #include <math.h>
+#include "player.h"
+#include "raylib.h"
 #include "map.h"
-
 void move_player2(player* pl){
   
-  if (IsKeyDown(KEY_W)){
+if (IsKeyDown(KEY_W)){
     if(/*vérifier collisions*/
         map[(int)(pl->pos_y + pl->spd*pl->dir_y)][(int) (pl->pos_x + pl->spd*pl->dir_x)] == 0){
       pl->pos_x += pl->spd*pl->dir_x;
@@ -40,73 +39,29 @@ void move_player2(player* pl){
     
   }
 }
-int main(){
-   
-  const int screenWidth = 800;
-  const int screenHeight = 450;
 
-  InitWindow(screenWidth,screenHeight,"mini jeu - basic window");
-  SetTargetFPS(60);
-  
-
-  player pl;
-  pl.joueur = 'P';
-  pl.pos_x = 3.5f;
-  pl.pos_y = 3.5f;
-  pl.dir_x = 1;
-  pl.dir_y = 0;
-  pl.spd = 0.1f;
-  pl.rot_spd = 0.05f;
+void draw_player(player* pl){
   float taille = 0.4f;
   float largeur = 0.3f;
   Vector2 v1;
   Vector2 v2;
   Vector2 v3;
 
+  float perp_x = - pl->dir_y;
+  float perp_y = pl->dir_x;
 
-
-
-  generer_map();
-
-
-
-  while (!WindowShouldClose()) 
-    {
-
-      float perp_x = - pl.dir_y;
-      float perp_y = pl.dir_x;
-
-      v1.x =( pl.pos_x + taille * pl.dir_x)*100;
-      v1.y = (pl.pos_y + taille * pl.dir_y)*100;
+  v1.x =( pl->pos_x + taille * pl->dir_x)*100;
+  v1.y = (pl->pos_y + taille * pl->dir_y)*100;
   
-      v2.x = (pl.pos_x - (taille * pl.dir_x) + (largeur * perp_x))*100;
-      v2.y = (pl.pos_y - (taille * pl.dir_y) + (largeur * perp_y))*100;
+  v2.x = (pl->pos_x - (taille * pl->dir_x) + (largeur * perp_x))*100;
+  v2.y = (pl->pos_y - (taille * pl->dir_y) + (largeur * perp_y))*100;
 
-      v3.x = (pl.pos_x - (taille * pl.dir_x) - (largeur * perp_x))*100;
-      v3.y = (pl.pos_y - (taille * pl.dir_y) - (largeur * perp_y))*100;
+  v3.x = (pl->pos_x - (taille * pl->dir_x) - (largeur * perp_x))*100;
+  v3.y = (pl->pos_y - (taille * pl->dir_y) - (largeur * perp_y))*100;
 
 
-     
-      
-      BeginDrawing();
-        ClearBackground(WHITE);
-        draw_grid(map);
-       
-        DrawTriangle(v1,v3,v2,RED);
-        
-        move_player2(&pl); 
-      
-      EndDrawing();
-    
-   
-    
-    
-  }
+  DrawTriangle(v1,v3,v2,RED);
 
 
 
- 
-
-  CloseWindow();
-  return EXIT_SUCCESS;
 }
