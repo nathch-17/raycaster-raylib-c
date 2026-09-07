@@ -7,17 +7,27 @@
 void move_player2(player* pl){
   
 if (IsKeyDown(KEY_W)){
-    if(/*vérifier collisions*/
-        map[(int)(pl->pos_y + pl->spd*pl->dir_y)][(int) (pl->pos_x + pl->spd*pl->dir_x)] == 0){
+  int target_y;
+  int target_x;
+  
+  target_y = (int)(pl->pos_y + pl->spd*pl->dir_y + (0.5f * pl->dir_y));
+  target_x = (int)(pl->pos_x + pl->spd*pl->dir_x + (0.5f * pl->dir_x));
+    
+  if(map[target_y][target_x] == 0)/*vérifier collisions*/{
       pl->pos_x += pl->spd*pl->dir_x;
       pl->pos_y += pl->spd*pl->dir_y;
     }
   }
   if(IsKeyDown(KEY_S)){
-    if(/*vérifier collisions*/
-        map[(int)(pl->pos_y - pl->spd*pl->dir_y)][(int)(pl->pos_x - pl->spd*pl->dir_x)] == 0 ){
-    pl->pos_x -= pl->spd*pl->dir_x;
-    pl->pos_y -= pl->spd*pl->dir_y;
+    int target_y;
+    int target_x;
+    
+    target_y = (int)(pl->pos_y - pl->spd*pl->dir_y - (0.5f*pl->dir_y));
+    target_x = (int)(pl->pos_x - pl->spd*pl->dir_x - (0.5f*pl->dir_x));
+
+    if( map[target_y][target_x] == 0 ){/*vérifier collisions*/
+        pl->pos_x -= pl->spd*pl->dir_x;
+        pl->pos_y -= pl->spd*pl->dir_y;
     }
   }
 
@@ -35,8 +45,6 @@ if (IsKeyDown(KEY_W)){
     
     pl->dir_x = old_dir_x*cos(-pl->rot_spd)-old_dir_y*sin(-pl->rot_spd);
     pl->dir_y = old_dir_x*sin(-pl->rot_spd)+old_dir_y*cos(-pl->rot_spd);
-
-    
   }
 }
 
