@@ -20,7 +20,8 @@ if (IsKeyDown(KEY_W)){
 
   target_y = (int)(pl->pos_y + step_y + hitbox_y);
   target_x = (int)(pl->pos_x + step_x + hitbox_x);
-    
+  
+  /*verfier les collisions sur l'axe x et y*/
   if (map[(int)pl->pos_y][target_x] == 0) {
     pl->pos_x += step_x;
   }
@@ -35,6 +36,7 @@ if (IsKeyDown(KEY_W)){
     target_y = (int)(pl->pos_y - step_y - hitbox_y);
     target_x = (int)(pl->pos_x - step_x - hitbox_x);
 
+    /*Vérifier les collisions sur l'axe x et y*/
     if (map[(int)pl->pos_y][target_x] == 0) {
       pl->pos_x -= step_x;
     }
