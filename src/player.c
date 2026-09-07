@@ -21,10 +21,13 @@ if (IsKeyDown(KEY_W)){
   target_y = (int)(pl->pos_y + step_y + hitbox_y);
   target_x = (int)(pl->pos_x + step_x + hitbox_x);
     
-  if(map[target_y][target_x] == 0)/*vérifier collisions*/{
-      pl->pos_x += step_x;
-      pl->pos_y +=step_y;
+  if (map[(int)pl->pos_y][target_x] == 0) {
+    pl->pos_x += step_x;
   }
+  if (map[target_y][(int)pl->pos_x] == 0) {
+    pl->pos_y += step_y;
+  }
+
   
 }
   if(IsKeyDown(KEY_S)){
@@ -32,10 +35,14 @@ if (IsKeyDown(KEY_W)){
     target_y = (int)(pl->pos_y - step_y - hitbox_y);
     target_x = (int)(pl->pos_x - step_x - hitbox_x);
 
-    if( map[target_y][target_x] == 0 ){/*vérifier collisions*/
-        pl->pos_x -= step_x;
-        pl->pos_y -= step_y;
+    if (map[(int)pl->pos_y][target_x] == 0) {
+      pl->pos_x -= step_x;
     }
+    if (map[target_y][(int)pl->pos_x] == 0) {
+      pl->pos_y -= step_y;
+    }
+
+
   }
 
   if(IsKeyDown(KEY_A)){
