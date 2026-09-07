@@ -10,24 +10,39 @@ if (IsKeyDown(KEY_W)){
   int target_y;
   int target_x;
   
-  target_y = (int)(pl->pos_y + pl->spd*pl->dir_y + (0.5f * pl->dir_y));
-  target_x = (int)(pl->pos_x + pl->spd*pl->dir_x + (0.5f * pl->dir_x));
+  float step_x = pl->spd*pl->dir_x;
+  float step_y = pl->spd*pl->dir_y;
+
+  
+  float hitbox_x = 0.5f*pl->dir_x;
+  float hitbox_y = 0.5f*pl->dir_y;
+
+  target_y = (int)(pl->pos_y + step_y + hitbox_y);
+  target_x = (int)(pl->pos_x + step_x + hitbox_x);
     
   if(map[target_y][target_x] == 0)/*vérifier collisions*/{
-      pl->pos_x += pl->spd*pl->dir_x;
-      pl->pos_y += pl->spd*pl->dir_y;
-    }
+      pl->pos_x += step_x;
+      pl->pos_y +=step_y;
   }
+  
+}
   if(IsKeyDown(KEY_S)){
     int target_y;
     int target_x;
+
+    float step_x = pl->spd*pl->dir_x;
+    float step_y = pl->spd*pl->dir_y;
+
+    float hitbox_x = 0.5f*pl->dir_x;
+    float hitbox_y = 0.5f*pl->dir_y;
+
     
-    target_y = (int)(pl->pos_y - pl->spd*pl->dir_y - (0.5f*pl->dir_y));
-    target_x = (int)(pl->pos_x - pl->spd*pl->dir_x - (0.5f*pl->dir_x));
+    target_y = (int)(pl->pos_y - step_y - hitbox_y);
+    target_x = (int)(pl->pos_x - step_x - hitbox_x);
 
     if( map[target_y][target_x] == 0 ){/*vérifier collisions*/
-        pl->pos_x -= pl->spd*pl->dir_x;
-        pl->pos_y -= pl->spd*pl->dir_y;
+        pl->pos_x -= step_x;
+        pl->pos_y -= step_y;
     }
   }
 
