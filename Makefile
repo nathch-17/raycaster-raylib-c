@@ -1,7 +1,7 @@
 CC = gcc 
 CFLAGS = -Wall -Wextra -Werror -I include -lraylib -lm -Wl,-rpath=/usr/local/lib
 NAME = test
-SRC = src/game.c src/map.c src/player.c
+SRC = src/game.c src/map.c src/player.c src/raycaster.c
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

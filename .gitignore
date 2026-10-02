@@ -31,3 +31,5 @@ Thumbs.db
 # --- Tests et Logs ---
 *.log
 tests/actual_output/
+
+compile_commands.json

@@ -1,3 +1,4 @@
+#include "game.h"
 #include "map.h"
 #include "player.h"
 #include "raylib.h"
@@ -5,10 +6,7 @@
 
 int main() {
 
-  const int screenWidth = 800;
-  const int screenHeight = 450;
-
-  InitWindow(screenWidth, screenHeight, "mini jeu - basic window");
+  InitWindow(SCREEN_W, SCREEN_H, "mini jeu - basic window");
   SetTargetFPS(60);
 
   player pl;
@@ -26,9 +24,8 @@ int main() {
   while (!WindowShouldClose()) {
 
     BeginDrawing();
-    ClearBackground(WHITE);
-    draw_grid(map);
-    draw_player(&pl);
+    ClearBackground(BLACK);
+    cast_rays(&pl);
 
     move_player2(&pl);
 
