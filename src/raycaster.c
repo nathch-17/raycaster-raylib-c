@@ -28,7 +28,7 @@ void cast_rays(player *pl) {
 
   float wall_height, distance_mur, dx, dy;
 
-  for (int i = 0; i < 800; i++) {
+  for (int i = 0; i < SCREEN_W; i++) {
 
     ray_angle = start_angle + i * angle_step;
     ray_dir_x = cos(ray_angle);
