@@ -1,4 +1,4 @@
-# Mini Jeu C
+# RayCasting in c with raylib
 
 Bienvenue sur le dépôt de mon **petit projet personnel** ! 
 Il s'agit d'un mini-jeu (moteur de type raycaster) développé en C pour m'entraîner, m'amuser et expérimenter. Le rendu graphique s'appuie sur la bibliothèque [raylib](https://www.raylib.com/).
