@@ -1,11 +1,12 @@
 #include "map.h"
 #include <raylib.h>
 #include <stdio.h>
-#include <stdlib.h>
 #define MAX 8
 
-int map[MAX][MAX];
-
+int map[8][8] = {{1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 1},
+                 {1, 0, 0, 1, 1, 0, 0, 1}, {1, 0, 0, 1, 1, 0, 0, 1},
+                 {1, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 0, 1, 1, 1},
+                 {1, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 1}};
 void draw_grid(int grid[MAX][MAX]) {
   for (int i = 0; i < MAX; i++) {
     for (int j = 0; j < MAX; j++) {
@@ -18,9 +19,9 @@ void draw_grid(int grid[MAX][MAX]) {
 
 void generer_map() {
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
-      if (i == 0 || j == 0 || i == 7 || j == 7) {
+  for (int i = 0; i < MAX; i++) {
+    for (int j = 0; j < MAX; j++) {
+      if (i == 0 || j == 0 || i == MAX - 1 || j == MAX - 1) {
         map[i][j] = 1;
       } else {
         map[i][j] = 0;

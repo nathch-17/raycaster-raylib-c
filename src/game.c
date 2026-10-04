@@ -1,5 +1,4 @@
 #include "game.h"
-#include "map.h"
 #include "player.h"
 #include "raylib.h"
 #include <stdlib.h>
@@ -18,8 +17,6 @@ int main() {
   pl.spd = 0.2f;
   pl.rot_spd = 0.05f;
   pl.angle = 0.0f;
-
-  generer_map();
 
   while (!WindowShouldClose()) {
 

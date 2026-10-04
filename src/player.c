@@ -2,8 +2,7 @@
 #include "map.h"
 #include "raylib.h"
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+
 void move_player2(player *pl) {
 
   int target_y;

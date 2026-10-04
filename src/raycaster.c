@@ -5,14 +5,16 @@
 #include <math.h>
 
 void draw_wall_slice(float wall_height, int x) {
-  int draw_start = (SCREEN_H / 2) - (wall_height / 2);
-  int draw_end = (SCREEN_H / 2) + (wall_height / 2);
+  int screenHeight = GetScreenHeight();
+
+  int draw_start = (screenHeight / 2) - (wall_height / 2);
+  int draw_end = (screenHeight / 2) + (wall_height / 2);
 
   if (draw_start < 0) {
     draw_start = 0;
   }
-  if (draw_end >= SCREEN_H) {
-    draw_end = SCREEN_H - 1;
+  if (draw_end >= screenHeight) {
+    draw_end = screenHeight - 1;
   }
 
   DrawLine(x, draw_start, x, draw_end, BLUE);
@@ -20,7 +22,8 @@ void draw_wall_slice(float wall_height, int x) {
 
 void cast_rays(player *pl) {
 
-  float angle_step = PI / 3 / 800;
+  int screenWidth = GetScreenWidth();
+  float angle_step = PI / 3 / screenWidth;
 
   float start_angle = pl->angle - PI / 6;
 
@@ -28,7 +31,7 @@ void cast_rays(player *pl) {
 
   float wall_height, distance_mur, dx, dy;
 
-  for (int i = 0; i < SCREEN_W; i++) {
+  for (int i = 0; i < screenWidth; i++) {
 
     ray_angle = start_angle + i * angle_step;
     ray_dir_x = cos(ray_angle);
@@ -47,7 +50,7 @@ void cast_rays(player *pl) {
     distance_mur = sqrt(pow(dx, 2) + pow(dy, 2));
     distance_mur = distance_mur * cos(pl->angle - ray_angle);
 
-    wall_height = SCREEN_H / distance_mur;
+    wall_height = GetScreenHeight() / distance_mur;
     draw_wall_slice(wall_height, i);
   }
 }
