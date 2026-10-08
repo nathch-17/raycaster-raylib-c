@@ -20,7 +20,7 @@ void draw_wall_slice(float wall_height, int x) {
   DrawLine(x, draw_start, x, draw_end, BLUE);
 }
 
-void cast_rays(player *pl) {
+void cast_rays(Player *pl) {
 
   int screenWidth = GetScreenWidth();
   float angle_step = PI / 3 / screenWidth;

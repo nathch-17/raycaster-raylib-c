@@ -10,5 +10,5 @@
 
 /*-------RAYCASTER-----------*/
 
-void cast_rays(player *pl);
+void cast_rays(Player *pl);
 #endif

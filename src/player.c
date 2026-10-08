@@ -3,14 +3,24 @@
 #include "raylib.h"
 #include <math.h>
 
-void move_player2(player *pl) {
+void init_player(Player *pl) {
+  pl->joueur = 'P';
+  pl->pos_x = 3.5f;
+  pl->pos_y = 3.5f;
+  pl->dir_x = 1;
+  pl->dir_y = 0;
+  pl->spd = 0.2f;
+  pl->rot_spd = 0.05f;
+  pl->angle = 0.0f;
+}
+
+void move_player2(Player *pl) {
 
   int target_y;
   int target_x;
 
   float step_x = pl->spd * pl->dir_x;
   float step_y = pl->spd * pl->dir_y;
-
   float hitbox_x = 0.5f * pl->dir_x;
   float hitbox_y = 0.5f * pl->dir_y;
 
@@ -52,7 +62,7 @@ void move_player2(player *pl) {
   pl->dir_y = sin(pl->angle);
 }
 
-void draw_player(player *pl) {
+void draw_player(Player *pl) {
   float taille = 0.4f;
   float largeur = 0.3f;
   Vector2 v1;

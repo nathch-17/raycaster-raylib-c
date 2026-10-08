@@ -20,8 +20,9 @@ struct joueur {
   float angle;
 };
 
-typedef struct joueur player;
-void move_player2(player *pl);
+typedef struct joueur Player;
+void init_player(Player *pl);
+void move_player2(Player *pl);
 
-void draw_player(player *pl);
+void draw_player(Player *pl);
 #endif
