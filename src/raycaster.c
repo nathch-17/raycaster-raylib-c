@@ -40,7 +40,8 @@ void cast_rays(player *pl) {
     float ray_x = pl->pos_x;
     float ray_y = pl->pos_y;
 
-    while (map[(int)ray_y][(int)ray_x] == 0) {
+    while (ray_x >= 0 && ray_x < MAP_WIDTH && ray_y >= 0 &&
+           ray_y < MAP_HEIGHT && map[(int)ray_y][(int)ray_x] == 0) {
       ray_x += ray_dir_x * 0.05f;
       ray_y += ray_dir_y * 0.05f;
     }
