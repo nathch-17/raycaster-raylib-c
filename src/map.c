@@ -59,7 +59,7 @@ void draw_minimap(Player *pl) {
 
     float ray_angle, ray_dir_x, ray_dir_y;
 
-    for (int i = 0; i < screenWidth; i++) {
+    for (int i = 0; i < screenWidth; i += 20) {
 
       ray_angle = start_angle + i * angle_step;
       ray_dir_x = cos(ray_angle);
@@ -68,8 +68,7 @@ void draw_minimap(Player *pl) {
       float ray_x = pl->pos_x;
       float ray_y = pl->pos_y;
 
-      while (ray_x >= 0 && ray_x < MAP_WIDTH && ray_y >= 0 &&
-             ray_y < MAP_HEIGHT && map[(int)ray_y][(int)ray_x] == 0) {
+      while (map[(int)ray_y][(int)ray_x] == 0) {
         ray_x += ray_dir_x * 0.05f;
         ray_y += ray_dir_y * 0.05f;
       }
