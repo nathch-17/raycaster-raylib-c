@@ -1,8 +1,10 @@
 #include "map.h"
+#include "player.h"
 #include <raylib.h>
 
 #define MAP_HEIGHT 20
 #define MAP_WIDTH 20
+#define TILE_SIZE 8
 
 int map[20][20] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -32,5 +34,19 @@ void draw_grid(int grid[MAP_HEIGHT][MAP_WIDTH]) {
         DrawRectangle(j * 100, i * 100, 100, 100, BLACK);
       }
     }
+  }
+}
+
+void draw_minimap(Player *pl) {
+  /*dessin mur*/
+  for (int i = 0; i < MAP_WIDTH; i++) {
+    for (int j = 0; j < MAP_HEIGHT; j++) {
+      if (map[j][i] == 1) {
+        DrawRectangle(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE, RED);
+      }
+      /*Dessin joueur*/
+    }
+
+    DrawCircle(pl->pos_x * TILE_SIZE, pl->pos_y * TILE_SIZE, 5.0, BROWN);
   }
 }

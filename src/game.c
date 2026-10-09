@@ -1,4 +1,5 @@
 #include "game.h"
+#include "map.h"
 #include "player.h"
 #include "raylib.h"
 #include <stdlib.h>
@@ -19,6 +20,7 @@ int main() {
 
     move_player2(&pl);
 
+    draw_minimap(&pl);
     EndDrawing();
   }
 
