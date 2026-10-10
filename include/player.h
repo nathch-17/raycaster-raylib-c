@@ -18,6 +18,7 @@ struct joueur {
 
   // Angle du joueur
   float angle;
+  float shoot_timer;
 };
 
 typedef struct joueur Player;

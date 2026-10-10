@@ -1,7 +1,8 @@
 #include "player.h"
 #include "map.h"
-#include "raylib.h"
 #include <math.h>
+#include <raylib.h>
+#include <stddef.h>
 
 void init_player(Player *pl) {
   pl->joueur = 'P';
@@ -12,6 +13,28 @@ void init_player(Player *pl) {
   pl->spd = 0.2f;
   pl->rot_spd = 0.05f;
   pl->angle = 0.0f;
+  pl->shoot_timer = 0;
+}
+
+void shoot_player(Player *pl) {
+  /*definition de départ de la balle que le joueur tirera*/
+
+  /*position depuis laquelle la balle partira*/
+  float ray_x = pl->pos_x;
+  float ray_y = pl->pos_y;
+
+  /*direction dans laquelle la balle partira*/
+  float dir_x = cos(pl->angle);
+  float dir_y = sin(pl->angle);
+
+  /*la balle avance jusqu'a trouver un mur (plus tard un enemy)*/
+
+  while (map[(int)ray_y][(int)ray_x] == 0) {
+    ray_x += dir_x * 0.05f;
+    ray_y += dir_y * 0.05f;
+  }
+
+  pl->shoot_timer = 10;
 }
 
 void move_player2(Player *pl) {
@@ -57,9 +80,18 @@ void move_player2(Player *pl) {
   if (IsKeyDown(KEY_D)) {
     pl->angle += pl->rot_spd;
   }
+
   // Mise à jour de la direction basée uniquement sur le nouvel angle
   pl->dir_x = cos(pl->angle);
   pl->dir_y = sin(pl->angle);
+
+  if ((IsKeyPressed(KEY_SPACE) || IsMouseButtonDown(MOUSE_BUTTON_LEFT)) &&
+      pl->shoot_timer == 0) {
+    shoot_player(pl);
+  }
+  if (pl->shoot_timer > 0) {
+    pl->shoot_timer--;
+  }
 }
 
 void draw_player(Player *pl) {
