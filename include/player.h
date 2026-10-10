@@ -23,7 +23,6 @@ struct joueur {
 
 typedef struct joueur Player;
 void init_player(Player *pl);
+void shoot_player(Player *pl);
 void move_player2(Player *pl);
-
-void draw_player(Player *pl);
 #endif

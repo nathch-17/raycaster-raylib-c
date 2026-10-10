@@ -93,25 +93,3 @@ void move_player2(Player *pl) {
     pl->shoot_timer--;
   }
 }
-
-void draw_player(Player *pl) {
-  float taille = 0.4f;
-  float largeur = 0.3f;
-  Vector2 v1;
-  Vector2 v2;
-  Vector2 v3;
-
-  float perp_x = -pl->dir_y;
-  float perp_y = pl->dir_x;
-
-  v1.x = (pl->pos_x + taille * pl->dir_x) * 100;
-  v1.y = (pl->pos_y + taille * pl->dir_y) * 100;
-
-  v2.x = (pl->pos_x - (taille * pl->dir_x) + (largeur * perp_x)) * 100;
-  v2.y = (pl->pos_y - (taille * pl->dir_y) + (largeur * perp_y)) * 100;
-
-  v3.x = (pl->pos_x - (taille * pl->dir_x) - (largeur * perp_x)) * 100;
-  v3.y = (pl->pos_y - (taille * pl->dir_y) - (largeur * perp_y)) * 100;
-
-  DrawTriangle(v1, v3, v2, RED);
-}
