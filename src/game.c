@@ -21,6 +21,7 @@ int main() {
     move_player2(&pl);
 
     draw_minimap(&pl);
+    draw_weapon(&pl);
     draw_crosshair();
     EndDrawing();
   }

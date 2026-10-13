@@ -47,7 +47,31 @@ void draw_minimap(Player *pl) {
     }
   }
 }
+/*draw weapon à remplacer plus tard*/
+void draw_weapon(Player *pl) {
+  int screenW = GetScreenWidth();
+  int screenH = GetScreenHeight();
 
+  // Dimensions de l'arme rudimentaire
+  int weapon_w = 60;
+  int weapon_h = 120;
+  int weapon_x = (screenW / 2) - (weapon_w / 2);
+  int weapon_y = screenH - weapon_h;
+
+  // Si on est en train de tirer, on applique le recul et la flamme
+  if (pl->shoot_timer > 0) {
+    weapon_y += 20; // L'arme recule vers le bas
+
+    // Flamme du canon (Muzzle flash)
+    DrawCircle(screenW / 2, weapon_y - 20, 30, YELLOW);
+    DrawCircle(screenW / 2, weapon_y - 20, 15, ORANGE);
+  }
+
+  // Le corps de l'arme
+  DrawRectangle(weapon_x, weapon_y, weapon_w, weapon_h, DARKGRAY);
+  DrawRectangle(weapon_x - 10, weapon_y + 40, weapon_w + 20, 20,
+                GRAY); // Détail
+}
 void draw_crosshair() {
   int center_x = GetScreenWidth() / 2;
   int center_y = GetScreenHeight() / 2;
