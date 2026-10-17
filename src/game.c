@@ -17,12 +17,8 @@ int main() {
     BeginDrawing();
     ClearBackground(BLACK);
     cast_rays(&pl);
-
     move_player2(&pl);
-
-    draw_minimap(&pl);
-    draw_weapon(&pl);
-    draw_crosshair();
+    DrawHud(&pl);
     EndDrawing();
   }
 

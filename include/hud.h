@@ -8,5 +8,6 @@
 void draw_minimap(Player *pl);
 void draw_weapon(Player *pl);
 void draw_crosshair();
+void DrawHud(Player *pl);
 
 #endif

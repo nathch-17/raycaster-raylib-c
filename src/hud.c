@@ -88,3 +88,9 @@ void draw_crosshair() {
   Vector2 end_v = {center_x, center_y + size};
   DrawLineEx(start_v, end_v, thickness, LIME);
 }
+void DrawHud(Player *pl) {
+
+  draw_minimap(pl);
+  draw_weapon(pl);
+  draw_crosshair();
+}
