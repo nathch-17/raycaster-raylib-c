@@ -12,6 +12,12 @@
 build/
 bin/
 test
+
+# --- Build Web (Emscripten) ---
+index.html
+index.js
+index.wasm
+index.data
 # --- IDE (Visual Studio Code) ---
 .vscode/*
 # On peut choisir de garder settings.json s'il est partagé avec l'équipe
